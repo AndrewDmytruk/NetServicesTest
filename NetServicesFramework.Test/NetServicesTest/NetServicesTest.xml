@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetServicesTest</name>
+    </assembly>
+    <members>
+        <member name="P:NetServices.Test.Program.User1Rsa">
+            <summary>
+            "User1" makes use of top secury level
+            </summary>
+        </member>
+        <member name="P:NetServices.Test.Program.User1Public">
+            <summary>
+            The public part is stored on server
+            <see cref="M:NetServices.Test.Program.ServerLaunch(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="F:NetServices.Test.Program.User2PasswordHash">
+            <summary>
+            "User2" uses password authentication. 
+            Password hash (not password string!) is used by <see cref="T:NetServices.SvcClient"/> and <see cref="T:NetServices.SvcServer"/>.
+            Password hash is never transmitted over network
+            </summary>
+        </member>
+        <member name="M:NetServices.Test.Program.Main(System.String[])">
+            <summary>
+            NetServicesTest
+            </summary>
+            <param name="args">Used for server launch</param>
+        </member>
+        <member name="T:NetServices.Test.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:NetServices.Test.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:NetServices.Test.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:NetServices.Test.Resources.ServerRsa">
+            <summary>
+              Поиск локализованного ресурса типа System.Byte[].
+            </summary>
+        </member>
+        <member name="P:NetServices.Test.Resources.User1Rsa">
+            <summary>
+              Поиск локализованного ресурса типа System.Byte[].
+            </summary>
+        </member>
+    </members>
+</doc>

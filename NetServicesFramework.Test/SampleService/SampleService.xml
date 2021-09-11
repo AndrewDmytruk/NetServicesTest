@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SampleService</name>
+    </assembly>
+    <members>
+        <member name="T:NetServices.SampleService.SampleSingleton">
+            <summary>
+            Samle implementation
+            </summary>
+        </member>
+        <member name="P:NetServices.SampleService.SampleSingleton.Time">
+            <summary>
+            Property sample
+            </summary>
+        </member>
+        <member name="M:NetServices.SampleService.SampleInstance.Echo(System.String@,System.Int32@)">
+            <summary>
+            Demo ByRef parameters
+            </summary>
+            <param name="value">ref parameter</param>
+            <param name="instance">out parameter</param>
+        </member>
+        <member name="M:NetServices.SampleService.SampleInstance.Create">
+            <summary>
+            See documentation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NetServices.SampleService.SampleInstance.#ctor">
+            <summary>
+            A not public constructor is invoked on Create method call
+            </summary>
+        </member>
+        <member name="E:NetServices.SampleService.SampleInstance.Event">
+            <summary>
+            Callback delegate
+            </summary>
+        </member>
+        <member name="M:NetServices.SampleService.SampleInstance.IEnumerableTest(System.Collections.Generic.IDictionary{System.Int32,System.String},System.String,System.Int32)">
+            <summary>
+            Method return type is interface
+            </summary>
+            <param name="value"></param>
+            <param name="count">Iteration count</param>
+            <returns>Interface</returns>
+        </member>
+    </members>
+</doc>

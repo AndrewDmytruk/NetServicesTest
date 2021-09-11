@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ISampleService</name>
+    </assembly>
+    <members>
+        <member name="T:NetServices.SampleService.ISampleSingleton">
+            <summary>
+            A sample interface
+            </summary>
+        </member>
+        <member name="P:NetServices.SampleService.ISampleSingleton.Time">
+            <summary>
+            Property
+            </summary>
+        </member>
+        <member name="P:NetServices.SampleService.ISampleSingleton.Item(System.Int32)">
+            <summary>
+            Method returns delegate
+            </summary>
+            <param name="index">Parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetServices.SampleService.ISampleInstance.Echo(System.String@,System.Int32@)">
+            <summary>
+            Sample using ByRef parameters
+            </summary>
+            <param name="value">Returns string in reverse order</param>
+            <param name="length">Returns string length</param>
+            <returns>Source string</returns>
+        </member>
+        <member name="M:NetServices.SampleService.ISampleInstance.Create">
+            <summary>
+            Acts as constructor call
+            </summary>
+            <returns>An instance of interface implementation</returns>
+        </member>
+        <member name="M:NetServices.SampleService.ISampleInstance.IEnumerableTest(System.Collections.Generic.IDictionary{System.Int32,System.String},System.String,System.Int32)">
+            <summary>
+            Obtaining of interface as a return value
+            </summary>
+            <param name="clientInterface">Client exports its interface</param>
+            <param name="value">Prameter</param>
+            <param name="count">Parameter</param>
+            <returns>Remote interface reference</returns>
+        </member>
+        <member name="E:NetServices.SampleService.ISampleInstance.Event">
+            <summary>
+            Sample of passing client delegate
+            </summary>
+        </member>
+        <member name="T:NetServices.SampleService.ISampleGeneric`1">
+            <summary>
+            Sample generic service
+            </summary>
+            <typeparam name="T">Generic parameter</typeparam>
+        </member>
+        <member name="M:NetServices.SampleService.ISampleGeneric`1.ToString">
+            <summary>
+            No need to implement
+            </summary>
+            <returns>The implementation class type</returns>
+        </member>
+        <member name="T:NetServices.Surrogate.XmlDocumentSurrogate">
+            <summary>
+            A sample SerializationSurrogate for XmlDocument class
+            </summary>
+        </member>
+    </members>
+</doc>

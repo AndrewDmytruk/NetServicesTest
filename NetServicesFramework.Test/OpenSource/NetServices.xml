@@ -1,0 +1,530 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetServices</name>
+    </assembly>
+    <members>
+        <member name="T:NetServices.SvcClient">
+            <summary>
+            Implements the client side functionality
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcClient.#ctor(System.String)">
+            <summary>
+            Creates connection for anonimous user
+            </summary>
+            <param name="serverName"></param>
+        </member>
+        <member name="M:NetServices.SvcClient.#ctor(System.String,System.String,System.Byte[])">
+            <summary>
+            Creates connection with password authentication
+            </summary>
+            <param name="serverName">Server name in Servers dictionary</param>
+            <param name="userName">User's account name known to server</param>
+            <param name="password">Password hash</param>
+        </member>
+        <member name="M:NetServices.SvcClient.#ctor(System.String,System.String,System.Security.Cryptography.RSACryptoServiceProvider)">
+            <summary>
+            Creates connection with RSA authentication
+            </summary>
+            <param name="serverName">The server name in Servers dictionary</param>
+            <param name="userName">Users's name known by server</param>
+            <param name="userPrivate">Users's secret</param>
+        </member>
+        <member name="P:NetServices.SvcClient.ConnectionException">
+            <summary>
+            An exception (if any) thrown during server connection process
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcClient.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            Creates client-server TCP connection and implements the authentication and key agreement protocol. 
+            The constructor code is included in open source for verification  
+            </summary>
+            <param name="serverName">The server name in Servers dictionary</param>
+            <param name="userName">Users's name known by server</param>
+            <param name="rsaOrPassword"></param>
+        </member>
+        <member name="M:NetServices.SvcClient.Dispose">
+            <summary>
+            IDisposable intrface implementation
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcClient.Servers">
+            <summary>
+            Stores server parameters to enable the particular server referencing with nominal name
+            </summary>
+        </member>
+        <member name="T:NetServices.Null">
+            <summary>
+            Substitutes null values in serializatin/deserialization process
+            </summary>
+        </member>
+        <member name="T:NetServices.SerializationSurrogateAttribute">
+            <summary>
+            Marks ISerializationSurrogate implementations
+            </summary>
+        </member>
+        <member name="F:NetServices.SerializationSurrogateAttribute.Type">
+            <summary>
+            Target type
+            </summary>
+        </member>
+        <member name="M:NetServices.SerializationSurrogateAttribute.#ctor(System.Type)">
+            <summary>
+            Creates attribute instance
+            </summary>
+            <param name="type">Target type</param>
+        </member>
+        <member name="T:NetServices.SvcFormatter">
+            <summary>
+            Handly extensions for serialization/deserialization
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcFormatter.Deserialize(System.Byte[])">
+            <summary>
+            Deserialize method
+            </summary>
+            <param name="value">Serialized data</param>
+            <returns>Deserialized object</returns>
+        </member>
+        <member name="M:NetServices.SvcFormatter.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserialize and cast
+            </summary>
+            <typeparam name="T">Target type</typeparam>
+            <param name="value">Serialized data</param>
+            <returns>Deserialized instance of type T</returns>
+        </member>
+        <member name="M:NetServices.SvcFormatter.Serialize(System.Object)">
+            <summary>
+            Serialize object
+            </summary>
+            <param name="value">Source serializable object</param>
+            <returns>Serialized data</returns>
+        </member>
+        <member name="P:NetServices.SvcFormatter.Formatter">
+            <summary>
+            The BinaryFormatter instance initialized with surrogate imlementations
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcFormatter._Formatter">
+            <summary>
+            Search for ISerializationSurrogate implementations
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcFormatter.GetValue``1(System.Runtime.Serialization.SerializationInfo,System.String)">
+            <summary>
+            Shortens GetValue method call in surrogate implementation
+            </summary>
+            <typeparam name="T">Type to cast deserialized value</typeparam>
+            <param name="info">SerializationInfo parameter value</param>
+            <param name="name">The name associated with the value to retrieve</param>
+            <returns>Value of stored type</returns>
+        </member>
+        <member name="M:NetServices.SvcFormatter.AddSurrogate``1(System.Runtime.Serialization.ISerializationSurrogate)">
+            <summary>
+            Adds additional surrogate implementation to <see cref="P:NetServices.SvcFormatter.Formatter"/>
+            </summary>
+            <typeparam name="T">A nonSerializable type</typeparam>
+            <param name="surrogate">The ISerializationSurrogate implementation instance</param>
+        </member>
+        <member name="T:NetServices.ServerErrorHandler">
+            <summary>
+            Delegate type for handling server errors
+            </summary>
+            <param name="sender">Server instance</param>
+            <param name="error">Exception instance</param>
+        </member>
+        <member name="T:NetServices.UserResolveHandler">
+            <summary>
+            Delegate type for handling a not registered user connection events
+            </summary>
+            <param name="userID">The ID of connecting user</param>
+            <returns>User information or null</returns>
+        </member>
+        <member name="T:NetServices.SvcServer">
+            <summary>
+            The server class
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcServer.#ctor(System.Security.Cryptography.RSACryptoServiceProvider)">
+            <summary>
+            Creates server instance
+            </summary>
+            <param name="rsaPrivate">Object must be initialized with RSA private key</param>
+        </member>
+        <member name="P:NetServices.SvcServer.Assemblies">
+            <summary>
+            List of assemlies containing implementations
+            <para>File pathes are relative to NetServices.dll location</para>
+            <para>If some assembly is not found the set-method throws FileNotFoundException </para>
+            </summary>
+        </member>
+        <member name="E:NetServices.SvcServer.ServerError">
+            <summary>
+            Currently is never raised
+            </summary>
+        </member>
+        <member name="P:NetServices.SvcServer.Users">
+            <summary>
+            List of regestered users (include anonimous user explicitly)
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcServer.AddUsers(NetServices.SvcUser[])">
+            <summary>
+            Adds users to internal dictionary. Users may be added dynamicaly
+            </summary>
+            <param name="users">Users list</param>
+        </member>
+        <member name="M:NetServices.SvcServer.RemoveUsers(System.Guid[])">
+            <summary>
+            Dynemicaly remove users
+            </summary>
+            <param name="userID"></param>
+        </member>
+        <member name="E:NetServices.SvcServer.UserResolve">
+            <summary>
+            Invoked if connecting user ID is not found in internal dictionary
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcServer.Start(System.Net.IPEndPoint[])">
+            <summary>
+            Starts TcpListeners
+            </summary>
+            <param name="endPoints">Endpoints list</param>
+        </member>
+        <member name="M:NetServices.SvcServer.ExportUsers">
+            <summary>
+            Creates encrypted container with user's information
+            </summary>
+            <returns>Encrypted array</returns>
+        </member>
+        <member name="M:NetServices.SvcServer.ImportUsers(System.Byte[])">
+            <summary>
+            Imorts users list from encrypted container
+            </summary>
+            <param name="data">Encrypted data</param>
+        </member>
+        <member name="M:NetServices.SvcServer.AcceptTcpClient(System.Object)">
+            <summary>
+            Examine this method for crypto protocol analysis
+            </summary>
+            <param name="obj">TcpClient object</param>
+        </member>
+        <member name="F:NetServices.SvcServer.codeBase">
+            <summary>
+            Store implementation assamblies in this directory
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcServer.CreateServices">
+            <summary>
+            Loads implementation assemblies and selects intefaces according to user permitions
+            </summary>
+            <returns>List of interface-implementation pairs</returns>
+        </member>
+        <member name="M:NetServices.SvcServer.System#IDisposable#Dispose">
+            <summary>
+            IDisposable interface implementation
+            </summary>
+        </member>
+        <member name="T:NetServices.SvcServerRef">
+            <summary>
+            Contains server connection information
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcServerRef.Address">
+            <summary>
+            Server IP address
+            </summary>
+        </member>
+        <member name="P:NetServices.SvcServerRef.First">
+            <summary>
+            Server port number
+            </summary>
+        </member>
+        <member name="P:NetServices.SvcServerRef.Second">
+            <summary>
+            Reserved 
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcServerRef.#ctor(System.Byte[],System.Net.IPAddress,System.Int32,System.Int32)">
+            <summary>
+            Server reference information
+            </summary>
+            <param name="rsaPulicKeyBlob">Server public key blob <see cref="M:System.Security.Cryptography.RSACryptoServiceProvider.ExportCspBlob(System.Boolean)"/></param>
+            <param name="server">Server IP address.
+            <para>Use <see cref="M:System.Net.Dns.GetHostAddresses(System.String)"/> if server is known by its name</para> 
+            </param>
+            <param name="firstPort">Connection port</param>
+            <param name="secondPort">Reserved</param>
+        </member>
+        <member name="T:NetServices.INetService">
+            <summary>
+            Base for services interfaces
+            </summary>
+        </member>
+        <member name="T:NetServices.NetService">
+            <summary>
+            Base class for services implementations
+            </summary>
+        </member>
+        <member name="M:NetServices.NetService.Dispose">
+            <summary>
+            IDisposable interface imlementation
+            </summary>
+        </member>
+        <member name="M:NetServices.NetService.Dispose(System.Boolean)">
+            <summary>
+            Override to do some disposing job
+            </summary>
+            <param name="disposing">If false - free only unmanaged resources</param>
+        </member>
+        <member name="T:NetServices.AuthType">
+            <summary>
+            Authentication types
+            </summary>
+        </member>
+        <member name="F:NetServices.AuthType.Any">
+            <summary>
+            Any type
+            </summary>
+        </member>
+        <member name="F:NetServices.AuthType.Anonimous">
+            <summary>
+            Anonimous
+            </summary>
+        </member>
+        <member name="F:NetServices.AuthType.Password">
+            <summary>
+            Password authentication
+            </summary>
+        </member>
+        <member name="F:NetServices.AuthType.StrongAuth">
+            <summary>
+            Public key CspBlob
+            </summary>
+        </member>
+        <member name="T:NetServices.SvcAccessAttribute">
+            <summary>
+            Used to specify access restrictions
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcAccessAttribute.Roles">
+            <summary>
+            Access is granted to users that "are in one of the roles"
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcAccessAttribute.AuthType">
+            <summary>
+            The value is used in access granting algorithm
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcAccessAttribute.#ctor(NetServices.AuthType,System.Object[])">
+            <summary>
+            Attribute constructor
+            </summary>
+            <param name="authType">Combination of types. Set value AuthType.Any for no restrictions</param>
+            <param name="roles">The ToString() values are used in IPrincipal.IsInRole call</param>
+        </member>
+        <member name="T:NetServices.SvcStream">
+            <summary>
+            A place-holder 
+            </summary>
+        </member>
+        <member name="T:NetServices.SvcTools">
+            <summary>
+            Defines usefull extentions
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:NetServices.SvcTools.GetTypes(System.AppDomain,System.Func{System.Type,System.Boolean})" -->
+        <member name="M:NetServices.SvcTools.GetType(System.AppDomain,System.String)">
+            <summary>
+            Gets loaded type
+            </summary>
+            <param name="domain">Current domain</param>
+            <param name="fullName">Type full name</param>
+            <returns>Found type</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.Split(System.String,System.Int32,System.String)">
+            <summary>
+            Simplifies System.String.Split method usage
+            </summary>
+            <param name="str">Source string</param>
+            <param name="count">Maximum number of resulting strings (0 - undefined)</param>
+            <param name="chars">Split characters or null to split with wightspaces</param>
+            <returns>Array of strings</returns>
+        </member>
+        <member name="F:NetServices.SvcTools.wightspace">
+            <summary>
+            Wightspace chars: " \t\r\n"
+            </summary>
+        </member>
+        <member name="M:NetServices.SvcTools.HashBytes(System.Byte[])">
+            <summary>
+            MD5.Create().ComputeHash(value)
+            </summary>
+            <param name="value">Source byte array</param>
+            <returns>MD5 hash</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.HashBytes(System.String)">
+            <summary>
+            MD5(Encoding.UTF8)
+            </summary>
+            <param name="value">Source string</param>
+            <returns>byte[16] MD5 hash</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.HashGuid(System.Byte[])">
+            <summary>
+            Computes MD5 hash and creates Guid struct
+            </summary>
+            <param name="value">Source bytes</param>
+            <returns>Guid struct</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.HashGuid(System.String)">
+            <summary>
+            Computes MD5 hash and creates Guid struct
+            </summary>
+            <param name="value">Source string</param>
+            <returns>Guid struct</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.Random(System.Byte[])">
+            <summary>
+            Generates random bytes with System.Security.Cryptography.RandomNumberGenerator
+            <para>
+            Note: Unless we do not have control over RSA implementation
+            there is no sence to do something more complex
+            </para>
+            </summary>
+            <param name="array">The array to fill with cryptographically strong random bytes</param>
+            <returns>Random bytes array</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.ToArray(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Produses an array from array segment
+            </summary>
+            <param name="bytes">Source array</param>
+            <param name="offset">Segment offset (default==0)</param>
+            <param name="length">Segment lengt (default==to-the-end)</param>
+            <returns>Byte array</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.Concat``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Concats items to IEnumerable (used with LINQ)
+            </summary>
+            <typeparam name="T">Item's Type</typeparam>
+            <param name="iEnum">Sequence</param>
+            <param name="args">Items to concat</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:NetServices.SvcTools.AsIDisposabe(System.Delegate)">
+            <summary>
+            Returns an IDisposable object to free delegate resources
+            </summary>
+            <param name="delegate">Remote method delegate object</param>
+            <returns>An IDisposable object</returns>
+        </member>
+        <member name="T:NetServices.Memory">
+            <summary>
+            Usefull methods for binary messages parsing and ceating
+            </summary>
+        </member>
+        <member name="M:NetServices.Memory.Read(System.Byte[],System.Func{System.IO.BinaryReader,System.Byte[]})">
+            <summary>
+            Parse an input message and create a response 
+            </summary>
+            <param name="input">Input message</param>
+            <param name="read">Parsing agorithm implementation</param>
+            <returns>Created response</returns>
+        </member>
+        <member name="M:NetServices.Memory.Write(System.Action{System.IO.BinaryWriter})">
+            <summary>
+            Create a binary massege
+            </summary>
+            <param name="write">Creation algorithm implementation</param>
+            <returns>Created message</returns>
+        </member>
+        <member name="M:NetServices.Memory.Write(System.Object[])">
+            <summary>
+            Implements a simple concatanation algorithm
+            </summary>
+            <param name="values">Values to concatanate</param>
+            <returns>Resulting message</returns>
+        </member>
+        <member name="T:NetServices.RC4">
+            <summary>
+            An implementation of RC4 crypto algorythm
+            </summary>
+        </member>
+        <member name="M:NetServices.RC4.#ctor(System.Byte[],System.Boolean)">
+            <summary>
+            Creates an instance initialized with given key
+            </summary>
+            <param name="key">Key bytes</param>
+            <param name="wipe">
+            Wipe key array (defaul == true)
+            <para>Recovery of source key from resulting internal state is a complex cryptanalytic task</para>
+            </param>
+        </member>
+        <member name="M:NetServices.RC4.code(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            In-place cryptotransform metod
+            </summary>
+            <param name="data">Source array</param>
+            <param name="offset">Segment offset (default: 0)</param>
+            <param name="length">Segment length (default: to end)</param>
+            <returns>Source array</returns>
+        </member>
+        <member name="T:NetServices.SvcUser">
+            <summary>
+            Represents user information
+            </summary>    
+        </member>
+        <member name="M:NetServices.SvcUser.#ctor(System.String,System.Byte[],System.Object[])">
+            <summary>
+            Creates a class instance
+            </summary>
+            <param name="userName">User's identification name</param>
+            <param name="keyOrBlob">
+            If keyOrBlob.Length == 16 then it is the password hash.
+            Othetwise - rsaPublicCspBlob
+            </param>
+            <param name="roles">User roles (ToString values are used to create GenericPrincipal object)</param>
+        </member>
+        <member name="M:NetServices.SvcUser.#ctor">
+            <summary>
+            Anonymous user constructor
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcUser.UserName">
+            <summary>
+            User's identification name
+            </summary>        
+        </member>
+        <member name="P:NetServices.SvcUser.UserID">
+            <summary>
+            User identifier (see <see cref="M:NetServices.SvcTools.HashGuid(System.String)"/> extention method)
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcUser.KeyOrBlob">
+            <summary>
+            Password hash or RSA public CspBlob 
+            </summary>
+        </member>
+        <member name="F:NetServices.SvcUser.Roles">
+            <summary>
+            User "roles"
+            </summary>
+        </member>
+        <member name="P:NetServices.SvcUser.AuthType">
+            <summary>
+            The value is used in GenericPricipal constructor call and with access granting procedure (see documentation)
+            </summary>
+        </member>
+        <member name="P:NetServices.SvcUser.Principal">
+            <summary>
+            The value is stored to Thread.CurrentPrincipal and may be examened by implementations
+            </summary>
+        </member>
+    </members>
+</doc>

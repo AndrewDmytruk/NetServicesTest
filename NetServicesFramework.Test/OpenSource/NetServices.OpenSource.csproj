@@ -1,0 +1,32 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net50;net48</TargetFrameworks>
+    <SignAssembly>false</SignAssembly>
+    <Authors>Andrii Dmytruk</Authors>
+    <Product></Product>
+    <Company>Andrii Dmytruk, UA</Company>
+    <AssemblyName>NetServices</AssemblyName>
+    <RootNamespace>NetServices</RootNamespace>
+    <Description></Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageId>NetServicesFramework</PackageId>
+    <Version>1.0.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net50|AnyCPU'">
+    <DocumentationFile>NetServices.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net50|AnyCPU'">
+    <DocumentationFile>NetServices.xml</DocumentationFile>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+  </ItemGroup>
+  
+</Project>
